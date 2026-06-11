@@ -16,4 +16,4 @@ def game_detail(request, pk):
     })
 
 def game_create(request):
-    pass
+    if request.method == "POST"
