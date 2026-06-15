@@ -3,6 +3,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .forms import BoardGameForm, ReviewForm
 from .models import BoardGame, Review
 
+def game_main(request):
+    return render(request, "catalog/game_main.html")
 
 def game_list(request):
     games = BoardGame.objects.all()
