@@ -5,6 +5,13 @@
     <title>Lista gier</title>
 </head>
 <body>
-
+    <h1>Lista Gier</h1>
+    <nav>
+        <ul>
+            {% for game in games %}
+                <li><a href="{% url 'game_detail' game.pk %}">{{game.title}}</a></li>
+            {% endfor %}
+        </ul>
+    </nav>
 </body>
 </html>

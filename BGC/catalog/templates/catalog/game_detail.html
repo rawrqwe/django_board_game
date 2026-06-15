@@ -1,10 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Detale Gry</title>
 </head>
 <body>
+    <h1>{{game.title}}</h1>
+    <p>Rok wydania: {{game.release_year}}</p>
+    <p>Wydawca: {{game.publisher}}</p>
+
+    <p>Minimalna liczba graczy: {{game.min_players}}</p>
+    <p>Maksymalna liczba graczy: {{game.max_players}}</p>
+    <p>Minimalny czas gry (minuty): {{game.min_time}}</p>
+    <p>Maksymalny czas gry (minuty): {{game.max_time}}</p>
+    <p>Minimalny wiek: {{game.min_age}}</p>
+
+    <p>Gatunki: {% for genre in game.genres.all %}
+    {{ genre.name }}
+    {% if not forloop.last %}, {% endif %}
+    {% endfor %}
+    </p>
+
+    <p>Opis: {{game.description}}</p>
+
+    <p>Okładka: {{game.image}}</p>
 
 </body>
 </html>
