@@ -1,10 +1,11 @@
 from django.shortcuts import render, get_object_or_404, redirect
-
 from .forms import BoardGameForm, ReviewForm
 from .models import BoardGame, Review
 
+
 def game_main(request):
     return render(request, "catalog/game_main.html")
+
 
 def game_list(request):
     games = BoardGame.objects.all()
@@ -45,4 +46,13 @@ def add_review(request, pk):
     return render(request, 'catalog/review_form.html', {
         'form': form,
         'game': game,
+    })
+
+
+def game_reviews(request, pk):
+    game = get_object_or_404(BoardGame, pk=pk)
+    reviews = Review.objects.filter(game=game)
+    return render(request, "catalog/game_reviews.html", {
+        'game': game,
+        'reviews': reviews,
     })
