@@ -1,10 +1,18 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'catalog/style.css' %}">
     <meta charset="UTF-8">
-    <title>Recenzja</title>
+    <title>Dodawanie Recenzji</title>
 </head>
 <body>
-
+    <h1>Dodaj recenzje do {{game.title}}</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit">Zapisz</button>
+    </form>
+    <a href="{% url 'game_detail' game.pk %}">Wróć</a>
 </body>
 </html>

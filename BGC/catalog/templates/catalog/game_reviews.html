@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'catalog/style.css' %}">
+    <meta charset="UTF-8">
+    <title>Recenzje Gier</title>
+</head>
+<body>
+    <h1>Recenzje gry: {{ game.title }}</h1>
+
+<table>
+    <tr>
+        <th>Nr</th>
+        <th>Ocena</th>
+        <th>Recenzja</th>
+    </tr>
+    {% for review in reviews %}
+    <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ review.score }}</td>
+        <td>{{ review.text }}</td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="3">Brak recenzji</td>
+    </tr>
+    {% endfor %}
+</table>
+
+    <a href="{% url 'game_detail' game.pk %}">Wróć</a>
+
+</body>
+</html>

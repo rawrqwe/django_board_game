@@ -56,3 +56,10 @@ def game_reviews(request, pk):
         'game': game,
         'reviews': reviews,
     })
+
+def game_delete(request, pk):
+    game = get_object_or_404(BoardGame, pk=pk)
+    if request.method == 'POST':
+        game.delete()
+        return redirect('game_list')
+    return render(request, 'catalog/game_confirm_delete.html', {'game': game})

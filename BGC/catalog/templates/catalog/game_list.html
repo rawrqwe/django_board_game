@@ -1,17 +1,21 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'catalog/style.css' %}">
     <meta charset="UTF-8">
     <title>Lista gier</title>
 </head>
 <body>
     <h1>Lista Gier</h1>
     <nav>
-        <ul>
+        <ol>
             {% for game in games %}
                 <li><a href="{% url 'game_detail' game.pk %}">{{game.title}}</a></li>
             {% endfor %}
-        </ul>
+        </ol>
     </nav>
+
+    <a href="{% url 'game_main' %}">Wróć</a>
 </body>
 </html>

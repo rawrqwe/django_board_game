@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'catalog/style.css' %}">
+    <meta charset="UTF-8">
+    <title>Usuwanie gry</title>
+</head>
+<body>
+    <h1>Usuń grę {{ game.title }}</h1>
+    <p>Czy na pewno chcesz usunąć tę grę?</p>
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit">Tak, usuń</button>
+        <a href="{% url 'game_detail' game.pk %}">Anuluj</a>
+</form>
+</body>
+</html>

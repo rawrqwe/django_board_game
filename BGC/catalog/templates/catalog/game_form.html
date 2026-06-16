@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'catalog/style.css' %}">
     <meta charset="UTF-8">
     <title>Formularz Gier</title>
 </head>
@@ -11,5 +13,6 @@
         {{form.as_p}}
         <button type="submit">Zapisz</button>
     </form>
+    <p><a href="{% url 'game_main' %}">Wróć</a></p>
 </body>
 </html>

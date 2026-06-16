@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'catalog/style.css' %}">
     <meta charset="UTF-8">
     <title>Detale Gry</title>
 </head>
@@ -22,8 +24,16 @@
     </p>
 
     <p>Opis: {{game.description}}</p>
+    <p>Dodaj recenzje: <a href="{% url 'add_review' game.pk %}">Tutaj</a></p>
 
-    <p>Okładka: {{game.image}}</p>
+    <p>Recenzje: <a href="{% url 'game_reviews' game.pk %}">Zobacz wszystkie recenzje</a></p>
+
+    <p><a href="{% url 'game_delete' game.pk%}">Usuń grę</a></p>
+
+    <p>Okładka: </p>
+    <img src="{{ game.image.url }}" alt="{{ game.title }}">
+
+    <p><a href="{% url 'game_list' %}">Wróć</a></p>
 
 </body>
 </html>
