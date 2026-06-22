@@ -13,7 +13,7 @@ class BoardGame(models.Model):
     title = models.CharField(max_length=200)
     release_year = models.IntegerField()
     publisher = models.CharField(max_length=200)
-    description = models.TextField(blank=True, default='brak opisu')
+    description = models.TextField(blank=True,)
     image = models.ImageField(upload_to='games/', blank=True)
 
     min_players = models.IntegerField()

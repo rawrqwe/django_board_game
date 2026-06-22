@@ -19,6 +19,12 @@ class BoardGameForm(forms.ModelForm):
             'genres': 'Gatunki',
         }
 
+        widgets = {
+            'description': forms.Textarea(attrs={
+                'placeholder': 'Wpisz opis gry...'
+            })
+        }
+
 class ReviewForm(forms.ModelForm):
     class Meta:
         model = Review
