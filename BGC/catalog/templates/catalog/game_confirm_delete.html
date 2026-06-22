@@ -7,12 +7,32 @@
     <title>Usuwanie gry</title>
 </head>
 <body>
-    <h1>Usuń grę {{ game.title }}</h1>
-    <p>Czy na pewno chcesz usunąć tę grę?</p>
+<div class="game-detail">
+
+    <div class="game-detail__header">
+        <h1>Usuń grę: {{ game.title }}</h1>
+    </div>
+
+    <p class="text-warning">
+        Czy na pewno chcesz usunąć tę grę?
+    </p>
+
     <form method="POST">
         {% csrf_token %}
-        <button type="submit">Tak, usuń</button>
-        <a href="{% url 'game_detail' game.pk %}">Anuluj</a>
-</form>
+
+        <div class="game-detail__actions">
+            <button type="submit" class="btn btn--danger">
+                Tak, usuń
+            </button>
+
+            <a href="{% url 'game_detail' game.pk %}" class="back-link">
+                Anuluj
+            </a>
+        </div>
+
+    </form>
+
+</div>
+</div>
 </body>
 </html>

@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .forms import BoardGameForm, ReviewForm
 from .models import BoardGame, Review
+from django.db.models import Avg
 
 
 def game_main(request):
@@ -15,9 +16,12 @@ def game_list(request):
 def game_detail(request, pk):
     game = get_object_or_404(BoardGame, pk=pk)
     reviews = Review.objects.filter(game=game)
+
+    avg_score = Review.objects.filter(game=game).aggregate(avg=Avg("score"))["avg"] or 0
     return render(request, "catalog/game_detail.html", {
         "game": game,
-        "reviews": reviews
+        "reviews": reviews,
+        "avg_score": avg_score,
     })
 
 
@@ -56,6 +60,7 @@ def game_reviews(request, pk):
         'game': game,
         'reviews': reviews,
     })
+
 
 def game_delete(request, pk):
     game = get_object_or_404(BoardGame, pk=pk)

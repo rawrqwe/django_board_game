@@ -8,11 +8,14 @@
 </head>
 <body>
     <h1>Dodaj recenzje do {{game.title}}</h1>
-    <form method="POST">
+    <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        {{form.as_p}}
-        <button type="submit">Zapisz</button>
+        {{ form.as_p }}
+
+        <div class="buttons">
+            <button type="submit">Zapisz</button>
+            <a href="{% url 'game_detail' game.pk %}" class="back-link">Wróć</a>
+        </div>
     </form>
-    <a href="{% url 'game_detail' game.pk %}">Wróć</a>
 </body>
 </html>

@@ -1,5 +1,5 @@
 from django.db import models
-from django.db.models.fields import PositiveIntegerField
+from django import forms
 
 
 class Genre(models.Model):
@@ -29,9 +29,10 @@ class BoardGame(models.Model):
 
 
 class Review(models.Model):
-    game = models.ForeignKey(BoardGame, on_delete=models.CASCADE)
-    score = models.IntegerField()
+    game = models.ForeignKey(BoardGame, on_delete=models.CASCADE, related_name="reviews")
+    score = models.IntegerField(choices=[(i, i) for i in range(1, 11)])
     text = models.TextField()
 
     def __str__(self):
         return f"{self.game.title} - {self.score}"
+

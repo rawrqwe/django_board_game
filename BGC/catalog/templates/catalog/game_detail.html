@@ -7,33 +7,77 @@
     <title>Detale Gry</title>
 </head>
 <body>
-    <h1>{{game.title}}</h1>
-    <p>Rok wydania: {{game.release_year}}</p>
-    <p>Wydawca: {{game.publisher}}</p>
+<div class="game-detail">
 
-    <p>Minimalna liczba graczy: {{game.min_players}}</p>
-    <p>Maksymalna liczba graczy: {{game.max_players}}</p>
-    <p>Minimalny czas gry (minuty): {{game.min_time}}</p>
-    <p>Maksymalny czas gry (minuty): {{game.max_time}}</p>
-    <p>Minimalny wiek: {{game.min_age}}</p>
+    <div class="game-detail__header">
+        <h1>{{ game.title }}</h1>
+        {% if game.genres.all %}
+        <ul class="tag-list">
+            {% for genre in game.genres.all %}
+            <li class="tag">{{ genre.name }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
 
-    <p>Gatunki: {% for genre in game.genres.all %}
-    {{ genre.name }}
-    {% if not forloop.last %}, {% endif %}
-    {% endfor %}
-    </p>
+    <div class="game-detail__body">
+        <div class="game-cover">
+            {% if game.image %}
+                <img src="{{ game.image.url }}" alt="{{ game.title }}">
+            {% else %}
+                <div class="game-cover__placeholder">Brak okładki</div>
+            {% endif %}
+        </div>
 
-    <p>Opis: {{game.description}}</p>
-    <p>Dodaj recenzje: <a href="{% url 'add_review' game.pk %}">Tutaj</a></p>
+        <div class="game-info">
+            <dl class="spec-list">
+                <div class="spec-item">
+                    <dt>Rok wydania</dt>
+                    <dd>{{ game.release_year }}</dd>
+                </div>
+                <div class="spec-item">
+                    <dt>Wydawca</dt>
+                    <dd>{{ game.publisher }}</dd>
+                </div>
+                <div class="spec-item">
+                    <dt>Liczba graczy</dt>
+                    <dd>{{ game.min_players }}–{{ game.max_players }}</dd>
+                </div>
+                <div class="spec-item">
+                    <dt>Czas gry</dt>
+                    <dd>{{ game.min_time }}–{{ game.max_time }} min</dd>
+                </div>
+                <div class="spec-item">
+                    <dt>Minimalny wiek</dt>
+                    <dd>{{ game.min_age }}+</dd>
+                </div>
+                <div class="spec-item">
+                    <dt>Średnia ocen</dt>
+                    <dd>
+                        {% if avg_score %}
+                            {{ avg_score|floatformat:1 }}/10
+                        {% else %}
+                            Brak ocen
+                        {% endif %}
+                    </dd>
+                </div>
+            </dl>
 
-    <p>Recenzje: <a href="{% url 'game_reviews' game.pk %}">Zobacz wszystkie recenzje</a></p>
+            <div class="game-description">
+                <p class="eyebrow">Opis</p>
+                <p>{{ game.description }}</p>
+            </div>
+        </div>
+    </div>
 
-    <p><a href="{% url 'game_delete' game.pk%}">Usuń grę</a></p>
+    <div class="game-detail__actions">
+        <a href="{% url 'add_review' game.pk %}" class="btn">Dodaj recenzję</a>
+        <a href="{% url 'game_reviews' game.pk %}" class="btn btn--outline">Zobacz recenzje</a>
+        <a href="{% url 'game_delete' game.pk %}" class="btn btn--danger">Usuń grę</a>
+    </div>
 
-    <p>Okładka: </p>
-    <img src="{{ game.image.url }}" alt="{{ game.title }}">
+    <a href="{% url 'game_list' %}" class="back-link">← Wróć do listy</a>
 
-    <p><a href="{% url 'game_list' %}">Wróć</a></p>
 
 </body>
 </html>

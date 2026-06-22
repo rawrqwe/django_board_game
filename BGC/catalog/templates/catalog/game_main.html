@@ -7,13 +7,22 @@
     <title>Głowna</title>
 </head>
 <body>
-    <h1>BGC</h1>
-    <nav>
-            <ul>
-                <li><a href="{% url 'game_list' %}">Lista gier</a></li>
-                <li><a href="{% url 'game_create' %}">Dodanie gry to katalogu</a></li>
-            </ul>
+<div class="game-detail">
+
+    <div class="game-detail__header">
+        <h1>Board Game Collection</h1>
+    </div>
+
+    <nav class="main-menu">
+        <a href="{% url 'game_list' %}" class="menu-card">
+            🎮 Lista gier
+        </a>
+
+        <a href="{% url 'game_create' %}" class="menu-card">
+            ➕ Dodaj grę do katalogu
+        </a>
     </nav>
 
+</div>
 </body>
 </html>

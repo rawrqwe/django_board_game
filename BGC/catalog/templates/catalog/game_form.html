@@ -7,12 +7,19 @@
     <title>Formularz Gier</title>
 </head>
 <body>
-    <h1>Dodaj grę</h1>
+<div class="game-detail">
+    <div class="game-detail__header">
+        <h1>Dodawanie gry</h1>   {# lub "Dodaj recenzję do {{ game.title }}" #}
+    </div>
+
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        {{form.as_p}}
-        <button type="submit">Zapisz</button>
+        {{ form.as_p }}
+        <div class="buttons">
+            <button type="submit">Zapisz</button>
+            <a href="{% url 'game_main' %}" class="back-link">Wróć</a>
+        </div>
     </form>
-    <p><a href="{% url 'game_main' %}">Wróć</a></p>
+</div>
 </body>
 </html>

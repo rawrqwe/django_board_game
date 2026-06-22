@@ -7,28 +7,43 @@
     <title>Recenzje Gier</title>
 </head>
 <body>
-    <h1>Recenzje gry: {{ game.title }}</h1>
+<div class="game-detail">
 
-<table>
-    <tr>
-        <th>Nr</th>
-        <th>Ocena</th>
-        <th>Recenzja</th>
-    </tr>
-    {% for review in reviews %}
-    <tr>
-        <td>{{ forloop.counter }}</td>
-        <td>{{ review.score }}</td>
-        <td>{{ review.text }}</td>
-    </tr>
-    {% empty %}
-    <tr>
-        <td colspan="3">Brak recenzji</td>
-    </tr>
-    {% endfor %}
-</table>
+    <div class="game-detail__header">
+        <h1>Recenzje gry: {{ game.title }}</h1>
+    </div>
 
-    <a href="{% url 'game_detail' game.pk %}">Wróć</a>
+    <div class="reviews-list">
+
+        {% for review in reviews %}
+        <div class="review-card">
+
+            <div class="review-score">
+                ⭐ {{ review.score }}/10
+            </div>
+
+            <div class="review-text">
+                {{ review.text }}
+            </div>
+
+            <div class="review-meta">
+                #{{ forloop.counter }}
+            </div>
+
+        </div>
+        {% empty %}
+        <p class="text-warning" style="text-align:center;">
+            Brak recenzji dla tej gry
+        </p>
+        {% endfor %}
+
+    </div>
+
+    <a href="{% url 'game_detail' game.pk %}" class="back-link">
+        ← Wróć
+    </a>
+
+</div>
 
 </body>
 </html>
