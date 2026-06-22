@@ -25,6 +25,33 @@ class BoardGameForm(forms.ModelForm):
             })
         }
 
+    def clean(self):
+        cleaned_data = super().clean()
+
+        min_players = cleaned_data.get("min_players")
+        max_players = cleaned_data.get("max_players")
+
+        min_time = cleaned_data.get("min_time")
+        max_time = cleaned_data.get("max_time")
+
+        # walidacja graczy
+        if min_players and max_players:
+            if min_players > max_players:
+                self.add_error(
+                    "min_players",
+                    "Minimalna liczba graczy nie może być większa od maksymalnej."
+                )
+
+        # walidacja czasu gry
+        if min_time and max_time:
+            if min_time > max_time:
+                self.add_error(
+                    "min_time",
+                    "Minimalny czas gry nie może być większy od maksymalnego."
+                )
+
+        return cleaned_data
+
 class ReviewForm(forms.ModelForm):
     class Meta:
         model = Review
