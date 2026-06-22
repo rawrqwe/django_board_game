@@ -4,22 +4,25 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'catalog/style.css' %}">
     <meta charset="UTF-8">
-    <title>Formularz Gier</title>
+    <title>Dodaj grę</title>
 </head>
 <body>
 <div class="game-detail">
+
     <div class="game-detail__header">
-        <h1>Dodawanie gry</h1>   {# lub "Dodaj recenzję do {{ game.title }}" #}
+        <h1>Dodaj grę do katalogu</h1>
     </div>
 
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
+
         <div class="buttons">
             <button type="submit">Zapisz</button>
             <a href="{% url 'game_main' %}" class="back-link">Wróć</a>
         </div>
     </form>
+
 </div>
 </body>
 </html>

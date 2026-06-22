@@ -4,10 +4,15 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'catalog/style.css' %}">
     <meta charset="UTF-8">
-    <title>Dodawanie Recenzji</title>
+    <title>Dodaj recenzję</title>
 </head>
 <body>
-    <h1>Dodaj recenzje do {{game.title}}</h1>
+<div class="game-detail">
+
+    <div class="game-detail__header">
+        <h1>Dodaj recenzję do {{ game.title }}</h1>
+    </div>
+
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
@@ -17,5 +22,7 @@
             <a href="{% url 'game_detail' game.pk %}" class="back-link">Wróć</a>
         </div>
     </form>
+
+</div>
 </body>
 </html>
