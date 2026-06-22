@@ -13,26 +13,51 @@
         <h1>Lista Gier</h1>
     </div>
 
+    <form method="GET" action="{% url 'game_list' %}">
+        <p>
+            <input
+                type="text"
+                name="q"
+                placeholder="Szukaj gry..."
+                value="{{ query|default:'' }}"
+            >
+        </p>
+        <div class="buttons">
+            <button type="submit">Szukaj</button>
+            {% if query %}
+                <a href="{% url 'game_list' %}" class="btn btn--outline">Wyczyść</a>
+            {% endif %}
+        </div>
+    </form>
+
+    {% if query %}
+        <p style="margin: 12px 0; color: #a0a0c0;">
+            Wyniki dla: <strong style="color: var(--primary);">{{ query }}</strong>
+        </p>
+    {% endif %}
+
     <ol class="game-list">
         {% for game in games %}
             <li>
-                <a class="game-card ui-card game-card-link"
+                <a class="game-card game-card-link"
                    href="{% url 'game_detail' game.pk %}">
                     {{ game.title }}
                 </a>
             </li>
         {% empty %}
-            <li class="text-warning">Brak gier w bazie</li>
+            <li class="text-warning">
+                {% if query %}
+                    Nie znaleziono gier pasujących do „{{ query }}"
+                {% else %}
+                    Brak gier w bazie
+                {% endif %}
+            </li>
         {% endfor %}
     </ol>
 
     <div class="game-detail__actions game-detail__actions--center">
-        <a href="{% url 'game_main' %}" class="back-link">
-            ← Wróć
-        </a>
+        <a href="{% url 'game_main' %}" class="back-link">← Wróć</a>
     </div>
-
-</div>
 
 </div>
 </body>

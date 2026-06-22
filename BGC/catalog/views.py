@@ -10,7 +10,14 @@ def game_main(request):
 
 def game_list(request):
     games = BoardGame.objects.all()
-    return render(request, "catalog/game_list.html", {"games": games})
+    query = request.GET.get('q')
+
+    if query:
+        games = games.filter(title__icontains=query)
+    return render(request, "catalog/game_list.html", {
+        "games": games,
+        "query": query,
+    })
 
 
 def game_detail(request, pk):
